@@ -22,23 +22,20 @@ Implement Partitioning: Use partitioning by status code to optimize query perfor
 # Question-1
 ### To count Total no of web-requests
 # Query 
-```
-sh
+```sh
 INSERT OVERWRITE DIRECTORY '/user/hue/output/total_requests'
 SELECT COUNT(*) FROM hue__tmp_web_server_logs
 ```
 
 # To retrive the query-1 output in bash
-```
-sh
+```sh
     hdfs dfs -getmerge /user/hue/output/total_requests total_requests.txt
 ```
 
 # Question-2
 ### To Analyze the frequncy of status codes
 # Query
-```
-sh
+```sh
 INSERT OVERWRITE DIRECTORY '/user/hue/output/status_codes'
 SELECT status, COUNT(*) 
 FROM hue__tmp_web_server_logs
@@ -47,16 +44,14 @@ ORDER BY status;
 ```
 
 # To retrive the query-2 output in bash
-```
-sh
+```sh
     hdfs dfs -getmerge /user/hue/output/status_codes status_codes.txt
 ```
 
 # Question-3
 ### To Get Most visited pages
 # query
-```
-sh
+```sh
 INSERT OVERWRITE DIRECTORY '/user/hue/output/most_visited_pages'
 SELECT url, COUNT(*) AS visit_count
 FROM hue__tmp_web_server_logs
@@ -66,15 +61,13 @@ LIMIT 3;
 ```
 
 # To retrive the query-3 output in bash
-```
-sh
+```sh
     hdfs dfs -getmerge /user/hue/output/most_visited_pages most_visited_pages.txt   ```
 
 # question-4 
 ### To do the Traffic Source Analysis
 # Query
-```
-sh
+```sh
 INSERT OVERWRITE DIRECTORY '/user/hue/output/user_agents'
 SELECT user_agent, COUNT(*) AS user_count
 FROM hue__tmp_web_server_logs
@@ -83,16 +76,14 @@ ORDER BY user_count DESC;
 ```
 
 # To retrive the query-4 output in bash
-```
-sh
+```sh
  hdfs dfs -getmerge /user/hue/output/user_agents user_agents.txt
 ```
 
 # question-5 
 ### To Export Suspicious IP Addresses
 # query
-```
-sh
+```sh
 INSERT OVERWRITE DIRECTORY '/user/hue/output/suspicious_ips'
 SELECT ip, COUNT(*) AS failed_requests
 FROM hue__tmp_web_server_logs
@@ -103,16 +94,15 @@ ORDER BY failed_requests DESC;
 ```
 
 # To retrive the query-5 output in bash
-```
-sh
+```sh
  hdfs dfs -getmerge /user/hue/output/suspicious_ips suspicious_ips.txt
 ```
 
 # question-6 
 ### To get the traffic trend Overtime
 # query
-```
-sh
+
+```sh
 INSERT OVERWRITE DIRECTORY '/user/hue/output/traffic_trends'
 SELECT DATE_FORMAT(`timestamp`, 'yyyy-MM-dd HH:mm') AS request_minute, COUNT(*) AS request_count
 FROM hue__tmp_web_server_logs
@@ -121,8 +111,8 @@ ORDER BY request_minute;
 ```
 
 # To retrive the query-6 output in bash
-```
-sh
+
+```sh
  hdfs dfs -getmerge /user/hue/output/traffic_trends traffic_trends.txt
 ```  
 
@@ -132,13 +122,13 @@ sh
 
 
 # To up the Docker
-```
-sh
+
+```sh
  docker compose up -d  ```
 
 # To up the container
-```
-sh
+
+```sh
 docker exec -it resourcemanager /bin/bash 
 ```
 
@@ -151,23 +141,23 @@ docker cp resourcemanager:/total_requests.txt output/
 docker cp resourcemanager:/status_codes.txt output/
 ```
 
-```
-sh
+
+```sh
 docker cp resourcemanager:/most_visited_pages.txt output/
 ```
 
-```
-sh
+
+```sh
 docker cp resourcemanager:/user_agents.txt output/
 ```
 
-```
-sh
+
+```sh
 docker cp resourcemanager:/suspicious_ips.txt output/
 ```
 
-```
-sh
+
+```sh
 docker cp resourcemanager:/traffic_trends.txt output/
 ```
 
