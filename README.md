@@ -125,7 +125,8 @@ ORDER BY request_minute;
 # To up the Docker
 
 ```sh
- docker compose up -d  ```
+ docker compose up -d
+```
 
 # To up the container
 
