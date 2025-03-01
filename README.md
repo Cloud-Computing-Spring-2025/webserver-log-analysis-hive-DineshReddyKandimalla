@@ -62,7 +62,8 @@ LIMIT 3;
 
 # To retrive the query-3 output in bash
 ```sh
-    hdfs dfs -getmerge /user/hue/output/most_visited_pages most_visited_pages.txt   ```
+    hdfs dfs -getmerge /user/hue/output/most_visited_pages most_visited_pages.txt
+ ```
 
 # question-4 
 ### To do the Traffic Source Analysis
